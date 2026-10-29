@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Inteligente de Estoque</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Controle Inteligente de Estoque</h1>
+        <p>Cadastre produtos e veja na hora o que está acabando.</p>
+    </header>
+
+    <main class="container">
+        <div id="mensagem" class="mensagem" role="status" hidden></div>
+        
+        <section class="indicadores">
+            <div class="indicador">
+                <span id="ind-total" class="valor">0</span>
+                <span>Produtos</span>
+            </div>
+            <div class="indicador alerta-vermelho">
+                <span id="ind-sem" class="valor">0</span>
+                <span>Sem estoque</span>
+            </div>
+            <div class="indicador alerta-amarelo">
+                <span id="ind-critico" class="valor">0</span>
+                <span>Estoque crítico</span>
+            </div>
+            <div class="indicador">
+                <span id="ind-valor" class="valor">R$ 0,00</span>
+                <span>Valor total em estoque</span>
+            </div>
+            
+        </section>
+    
+        <div class="colunas">
+            <section class="painel">
+                <h2 id="titulo-form">Novo produto</h2>
+                <form id="form-produto" novalidate>
+                <label>Nome
+                    <input type="text" id="nome" autocomplete="off">
+                </label>
+                <label>Categoria
+                    <input type="text" id="categoria" list="lista-categorias">
+                    <datalist id="lista-categorias"></datalist>
+                </label>
+                <div class="linha">
+                    <label>Quantidade
+                    <input type="number" id="quantidade" min="0" step="1">
+                    </label>
+                    <label>Quantidade mínima
+                    <input type="number" id="minimo" min="0" step="1">
+                    </label>
+                </div>
+                <label>Preço unitário (R$)
+                    <input type="number" id="preco" min="0" step="0.01">
+                </label>
+                <div class="linha">
+                    <button type="submit" id="btn-salvar" class="btn primario">Cadastrar produto</button>
+                    <button type="button" id="btn-cancelar" class="btn" hidden>Cancelar edição</button>
+                </div>
+                </form>
+        
+                <h2>Prioridade de reposição</h2>
+                <p class="dica">Os 5 produtos com menos unidades.</p>
+                <ol id="lista-prioritarios" class="prioritarios"></ol>
+            </section>
+
+            <section class="painel">
+                <h2>Produtos</h2>
+                <div class="ferramentas">
+                <input type="search" id="busca" placeholder="Pesquisar pelo nome">
+                <select id="filtro-categoria"></select>
+                <select id="filtro-situacao">
+                    <option value="">Todas as situações</option>
+                    <option value="sem-estoque">Sem estoque</option>
+                    <option value="critico">Estoque crítico</option>
+                    <option value="normal">Estoque normal</option>
+                </select>
+                <select id="ordenacao">
+                    <option value="nome">Ordenar por nome</option>
+                    <option value="quantidade">Ordenar por quantidade</option>
+                    <option value="preco">Ordenar por preço</option>
+                </select>
+                </div>
+        
+                <div class="tabela-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Produto</th><th>Qtd.</th><th>Mín.</th><th>Preço</th>
+                        <th>Valor total</th><th>Situação</th><th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="corpo-tabela"></tbody>
+                </table>
+                </div>
+                <p id="sem-resultados" class="vazio" hidden></p>
+            </section>
+        </div>
+    </main>
+    
+    <script src="src/script.js"></script>
+</body>
+</html>
