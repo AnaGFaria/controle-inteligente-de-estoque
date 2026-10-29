@@ -32,7 +32,7 @@ Regras adicionais:
 ```
 # 1. Clone o repositório
 git clone https://github.com/AnaGFaria/controle-inteligente-de-estoque.git
-cd aula_03-gerenciador_tarefas
+cd controle-inteligente-de-estoque
 # 2. Abra o arquivo `index.html` no navegador. Não precisa de servidor nem de instalação.
 ```
 
